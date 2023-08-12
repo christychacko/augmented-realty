@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <meta
+      http-equiv="origin-trial"
+      data-feature="WebVR (For Chrome M59+)"
+      data-expires="2017-07-28"
+      content="ArFv1ZeTwzkhjNE00uAE+XtiQB41fwqG/TqlFMLrepd9sforQSvQE/tgfIbUMYNuNre4QR1k4/z8xp2mV3dbhwwAAABeeyJvcmlnaW4iOiJodHRwczovL2FmcmFtZS5pbzo0NDMiLCJmZWF0dXJlIjoiV2ViVlIxLjEiLCJleHBpcnkiOjE1MDEyMTcwMDIsImlzU3ViZG9tYWluIjp0cnVlfQ=="
+    />
+    <meta charset="utf-8" />
+    <title>Video</title>
+    <meta name="description" content="Video - A-Frame" />
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@cb0bb8407968be713b79008548b7044908ba5729/dist/aframe-master.min.js"></script>
+
+    <script src="js/play-on-click.js"></script>
+    <script src="js/hide-on-play.js"></script>
+    <script src="js/motion-control.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="grid" src="images/border.png" crossorigin="anonymous" />
+        <img id="sky" src="images/stars.png" crossorigin="anonymous" />
+        <video
+          id="videoBunny"
+          preload="auto"
+          src="video1/attack.mkv"
+          width="160"
+          height="90"
+          autoplay
+          loop="true"
+          crossorigin="anonymous"
+        ></video>
+        <video
+          id="videoFireworks"
+          preload="auto"
+          src="https://cdn.aframe.io/videos/fireworks.mp4"
+          width="160"
+          height="90"
+          autoplay
+          loop="true"
+          crossorigin="anonymous"
+          muted
+        ></video>
+      </a-assets>
+
+      <a-entity
+        material="shader: flat; src: #videoBunny"
+        geometry="primitive: plane; width: 160; height: 90;"
+        position="0 60 -250"
+        rotation="0 35 0"
+        play-on-click
+        visible="false"
+        muted
+      >
+      </a-entity>
+
+      <a-entity
+        material="shader: flat; src: #videoFireworks"
+        geometry="primitive: plane; width: 160; height: 90"
+        position="0 -60 -200"
+        rotation="0 -35 0"
+        play-on-click
+        visible="false"
+      >
+      </a-entity>
+      <a-sky rotation="0 0 0" color="#FFFFFF" material="src: #sky"> </a-sky>
+      <a-plane
+        width="100"
+        height="100"
+        position=" 0.00 0.00 0.00"
+        rotation="-90 0 0"
+        color="#888888"
+        material="src: #grid; repeat:100 100; transparent: true; opacity: 0.75"
+        shadow="cast: false; receive: true"
+      >
+      </a-plane>
+      <a-camera id="myCamera" motion-control>
+        <a-entity
+          position="0 0 -1.5"
+          text="align: center;
+                width: 6;
+                wrapCount: 100;
+                color: black;
+                value: Click or tap to start video"
+          hide-on-play="#videoFireworks"
+        >
+        </a-entity>
+      l</a-camera>
+      <script>
+        let myEntity = document.querySelector("#my-entity")
+        let position = myEntity.getObject3D().position
+        console.log(position) // [0, 0, 0]
+      </script>
+    </a-scene>
+  </body>
+</html>
